@@ -16,12 +16,12 @@ contract SpectreFaucet {
     address payable owner;
     ISpectreToken public token;
 
-    uint256 public withdrawlAmount = 100 * (10 ** 18);
+    uint256 public withdrawalAmount = 100 * (10 ** 18);
     uint256 public lockTime = 2 minutes;
 
     mapping(address => uint256) nextAccessTime;
 
-    event Withdrawl(address indexed to, uint256 indexed amount);
+    event Withdrawal(address indexed to, uint256 indexed amount);
     event Deposit(address indexed from, uint256 indexed amount);
 
     constructor(address tokenAddress) payable {
@@ -44,25 +44,25 @@ contract SpectreFaucet {
             "Request must NOT originate from a zero address!"
         );
         require(
-            token.balanceOf(address(this)) >= withdrawlAmount,
-            "Insufficient balance in faucet for withdrawl request!"
+            token.balanceOf(address(this)) >= withdrawalAmount,
+            "Insufficient balance in faucet for withdrawal request!"
         );
         require(
             block.timestamp >= nextAccessTime[msg.sender],
-            "Insufficient time elapsed since last withdrawl - Try again later!"
+            "Insufficient time elapsed since last withdrawal - Try again later!"
         );
 
         nextAccessTime[msg.sender] = block.timestamp + lockTime;
 
-        token.transfer(msg.sender, withdrawlAmount);
+        token.transfer(msg.sender, withdrawalAmount);
     }
 
     function getBalance() external view returns (uint256) {
         return token.balanceOf(address(this));
     }
 
-    function setWithdrawlAmount(uint256 amount) external onlyOwner {
-        withdrawlAmount = amount * (10 ** 18);
+    function setwithdrawalAmount(uint256 amount) external onlyOwner {
+        withdrawalAmount = amount * (10 ** 18);
     }
 
     function setLockTime(uint256 amount) external onlyOwner {
@@ -71,6 +71,6 @@ contract SpectreFaucet {
 
     function withdraw() external onlyOwner {
         token.transfer(msg.sender, token.balanceOf(address(this)));
-        emit Withdrawl(msg.sender, token.balanceOf(address(this)));
+        emit Withdrawal(msg.sender, token.balanceOf(address(this)));
     }
 }
