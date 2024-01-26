@@ -194,6 +194,7 @@
 		height: fit-content;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		font-family: $font-mono;
 		background: linear-gradient(120deg, rgb(49, 90, 179) 2.66%, rgba(2, 36, 128, 0.582) 98.99%);
 		color: #fff !important;
@@ -238,10 +239,57 @@
 		&:hover {
 			box-shadow: 0 0 70px rgba(5, 1, 27, 0.9);
 		}
+
+		&--go {
+			position: absolute;
+			bottom: -3px;
+			width: 42%;
+			margin-top: 1rem;
+			background: linear-gradient(120deg, rgb(0, 40, 216) 5%, rgb(3, 247, 255) 95%);
+			border-radius: 2rem;
+
+			&:hover > ion-icon[name="chevron-forward-outline"] {
+				visibility: visible;
+				opacity: 1;
+				right: 0;
+			}
+
+			ion-icon {
+				font-size: 1.3em;
+				padding-right: 20px;
+
+				&[name="chevron-forward-outline"] {
+					font-size: 1em;
+					position: absolute;
+					right: 10px;
+					visibility: hidden;
+					opacity: 0;
+					transition: all 0.3s ease-out;
+				}
+			}
+		}
 	}
 
 	.tx-hash {
-		margin-top: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1.8rem;
+
+		ion-icon {
+			margin-right: 0.2em;
+		}
+
+		a {
+			margin-left: 0.5em;
+			text-decoration: underline !important;
+			font-weight: 600;
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: #fc0037 !important;
+			}
+		}
 	}
 }
 

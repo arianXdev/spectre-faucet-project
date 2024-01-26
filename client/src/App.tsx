@@ -7,6 +7,7 @@ import faucetContract from "./ethereum/faucet";
 import LOGO from "./assets/images/spectre-logo-light.png";
 
 import toast, { Toaster } from "react-hot-toast";
+import { Icon } from "./components";
 import Typed from "typed.js";
 
 import "./App.scss";
@@ -207,12 +208,20 @@ const App = () => {
 								</form>
 
 								{transactionData ? (
-									<p className="tx-hash">
-										TX Hash:{" "}
-										<a href={`${getChainExplorer(String(chainId))}/tx/${transactionData}`} target="_blank">
-											{transactionData}
+									<>
+										<p className="tx-hash">
+											<Icon name="finger-print-outline" />
+											TX Hash:
+											<a href={`${getChainExplorer(String(chainId))}/tx/${transactionData}`} target="_blank">
+												{transactionData}
+											</a>
+										</p>
+
+										<a href="https://spectre.arianh.ir" target="_blank" className="main__btn main__btn--go">
+											Go to Spectre DEX
+											<Icon name="chevron-forward-outline" />
 										</a>
-									</p>
+									</>
 								) : null}
 							</div>
 						</div>
