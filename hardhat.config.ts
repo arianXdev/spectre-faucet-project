@@ -19,7 +19,7 @@ const config: HardhatUserConfig = {
 		},
 		// Polygon testnet
 		polygon: {
-			url: `https://polygon-mumbai.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+			url: `https://polygon-mumbai.infura.io/v3/${INFURA_API_KEY}`,
 			accounts: [process.env.PRIVATE_KEY || ""],
 		},
 		// BNB Chain (formerly Binance Smart Chain) testnet

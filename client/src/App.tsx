@@ -11,6 +11,13 @@ import Typed from "typed.js";
 
 import "./App.scss";
 
+enum NetworksChainId {
+	Sepolia = "11155111",
+	Polygon = "80001",
+	BSC = "97",
+	Avalanche = "43113",
+}
+
 const App = () => {
 	const [walletAddress, setWalletAddress] = useState("");
 	const [signer, setSigner] = useState<ethers.Signer>();
@@ -79,7 +86,7 @@ const App = () => {
 				setSigner(await provider.getSigner());
 
 				// Get the local contract instance
-				setFaucet(faucetContract(provider));
+				setFaucet(faucetContract(String(chainId), provider));
 
 				setWalletAddress(accounts[0]);
 			} catch (err) {
@@ -105,7 +112,7 @@ const App = () => {
 					setSigner(await provider.getSigner());
 
 					// Get the local contract instance
-					setFaucet(faucetContract(provider));
+					setFaucet(faucetContract(String(chainId), provider));
 					setWalletAddress(accounts[0]);
 				}
 			} catch (err) {
@@ -137,6 +144,25 @@ const App = () => {
 		} catch (err) {
 			console.log(err.message);
 			toast.error("Something went wrong! - Try again later.");
+		}
+	};
+
+	const getChainExplorer = (chainId: NetworksChainId) => {
+		switch (chainId) {
+			case NetworksChainId.Sepolia:
+				return "https://sepolia.etherscan.io/tx";
+
+			case NetworksChainId.Polygon:
+				return "https://mumbai.polygonscan.com/tx";
+
+			case NetworksChainId.Avalanche:
+				return "https://testnet.snowtrace.io/tx";
+
+			case NetworksChainId.BSC:
+				return "https://testnet.bscscan.com/tx";
+
+			default:
+				return "https://sepolia.etherscan.io/tx";
 		}
 	};
 
@@ -183,7 +209,7 @@ const App = () => {
 								{transactionData ? (
 									<p className="tx-hash">
 										TX Hash:{" "}
-										<a href={`https://sepolia.etherscan.io/tx/${transactionData}`} target="_blank">
+										<a href={`${getChainExplorer(String(chainId))}/${transactionData}`} target="_blank">
 											{transactionData}
 										</a>
 									</p>
