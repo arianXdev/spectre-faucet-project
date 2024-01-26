@@ -1,0 +1,648 @@
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+
+$color-bg-network-menu: $color-dark;
+
+.Header {
+	position: relative;
+	z-index: 16;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 28% 33% 1fr;
+	padding-top: 0.4rem;
+	padding-inline: 2rem;
+	font-size: 16px;
+	user-select: none;
+
+	/* ----------------------- */
+	/* ----- Header LOGO ----- */
+	/* ----------------------- */
+	&__logo {
+		color: white !important;
+		user-select: none;
+	}
+
+	&__link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	&__img {
+		max-width: 4rem;
+	}
+
+	&__title {
+		font-family: $font-oxanium;
+		font-size: 1.7em;
+		margin-inline-start: 0.4rem;
+		margin-inline-end: 0.5rem;
+		letter-spacing: 4px;
+	}
+
+	&__span {
+		font-family: $font-oxanium;
+		font-size: 0.9em;
+		margin-block-start: 0.6em;
+		letter-spacing: 2px;
+	}
+
+	/* ----------------------- */
+	/* ----- Header TABS ----- */
+	/* ----------------------- */
+	&__tabs-wrapper {
+		@include displayFlex(center);
+	}
+
+	&__tabs {
+		@include displayFlex(center);
+		position: relative;
+		width: 90%;
+		height: 50px;
+		padding: 10px;
+		text-align: center;
+		color: white;
+		background: rgba(3, 5, 58, 0.3);
+		box-shadow: 0px 2px 10px rgba(18, 16, 38, 0.4);
+		border-radius: 30px;
+		letter-spacing: 3px;
+		z-index: 0;
+	}
+
+	&__tab {
+		position: absolute;
+		width: 40%;
+		font-size: 1em;
+		padding-block: 0.7rem;
+		border-radius: inherit;
+		background: $color-non-active;
+		transition: all 0.4s ease-in-out;
+		z-index: 3;
+
+		&--swap {
+			left: 2%;
+		}
+
+		&--trade {
+			right: 2%;
+		}
+
+		&--active {
+			width: 60%;
+			background: $color-primary;
+			box-shadow: inherit;
+			font-weight: 900;
+			z-index: 5;
+		}
+	}
+
+	/* ----------------------- */
+	/* -- Header CONNECTION -- */
+	/* ----------------------- */
+	&__connection {
+		display: grid;
+		grid-template-columns: 42% 1fr 20%;
+		gap: 0.5rem;
+		color: white;
+	}
+
+	&__networks {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-end;
+	}
+
+	&__network {
+		position: relative;
+		width: 80%;
+	}
+
+	&__network-btn {
+		width: 100%;
+		position: relative;
+		display: inline-flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding-block: 0.6rem;
+		padding-left: 1.1em;
+		font-size: 0.9rem;
+		color: white;
+		letter-spacing: 1px;
+		background: rgba(255, 255, 255, 0.03);
+		border-radius: 1.1rem;
+		border: 0.15em solid #01c0fd;
+		box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.25);
+		transition: all 0.3s ease-out;
+		z-index: 26;
+
+		&[name="BSC"] {
+			border: 0.15em solid rgb(248, 209, 47);
+
+			& > ion-icon {
+				color: rgb(248, 209, 47);
+			}
+		}
+
+		&[name="Avalanche"] {
+			border: 0.15em solid #e84142;
+
+			& > ion-icon {
+				color: #e84142;
+			}
+		}
+
+		&[name="Polygon"] {
+			border: 0.15em solid #8a46ff;
+
+			& > ion-icon {
+				color: #8a46ff;
+			}
+		}
+
+		&.active {
+			background: rgba(255, 255, 255, 0.09);
+			box-shadow: 0px 0px 25px 6px rgba(0, 15, 59, 0.7), 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+			& > ion-icon {
+				rotate: 180deg;
+			}
+		}
+
+		& > img {
+			width: 40px;
+			padding-right: 8px;
+			padding-left: 12px;
+
+			&[alt="Polygon"] {
+				padding-block: 1px;
+			}
+		}
+
+		& > ion-icon {
+			position: absolute;
+			right: 0.7em;
+			font-size: 1.1em;
+			color: #01c0fd;
+			transition: all 0.5s ease-out;
+		}
+	}
+
+	&__network-icon {
+		font-size: 1.4em;
+		margin-left: 10px;
+		margin-right: 10px;
+		color: #01c0fd;
+	}
+
+	&__account {
+		display: inherit;
+		grid-template-columns: 100%;
+		align-items: center;
+		margin-left: 0.5rem;
+	}
+
+	&__account-btn {
+		position: relative;
+		@include displayFlex(center);
+		width: 90%;
+		padding: 0.7rem 2.2rem 0.7rem 1.5rem;
+		font-family: $font-oxanium;
+		font-size: 1rem;
+		font-weight: 700;
+		color: $color-primary;
+		border-radius: 1.1rem;
+		background: white;
+		box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+		transition: all 0.3s ease-in-out;
+		align-self: center;
+
+		&.connected {
+			width: 100%;
+		}
+
+		&.connected:hover {
+			background: rgba(255, 255, 255, 0.85);
+		}
+
+		&.connected:hover > ion-icon[name="chevron-forward-outline"] {
+			visibility: visible;
+			opacity: 1;
+			right: 0;
+		}
+
+		ion-icon {
+			font-size: 1.3em;
+			padding-right: 10px;
+
+			&[name="chevron-forward-outline"] {
+				font-size: 1.2em;
+				position: absolute;
+				right: 7px;
+				visibility: hidden;
+				opacity: 0;
+				transition: all 0.3s ease-out;
+			}
+		}
+	}
+
+	&__moreInfo {
+		position: relative;
+		@include displayFlex(center);
+
+		justify-self: center;
+		align-self: center;
+		cursor: pointer;
+
+		&-btn {
+			font-size: 2em;
+			@include displayFlex(center);
+			color: white;
+			background: none;
+			outline: none;
+			border: none;
+			border-radius: 1.3rem;
+			padding: 0.5rem;
+			transition: all 0.1s ease-in-out;
+
+			&:hover {
+				background: #ffffff0a;
+			}
+
+			&.active {
+				background: #ffffff0a;
+			}
+		}
+	}
+}
+
+.network-menu {
+	position: absolute;
+	top: 4rem;
+	left: -0.7rem;
+	width: 15rem;
+	color: #01c0fd;
+	padding: 0.2em 0.5em;
+	background-color: $color-bg-network-menu;
+	box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.3);
+	font-size: 15.5px;
+	border-radius: 26px;
+	overflow: hidden;
+	z-index: 26;
+
+	&__item {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 0.8em 1.5em;
+		margin: 0.3em 0;
+		border-radius: 17px;
+		transition: all 0.3s ease-out;
+		cursor: pointer;
+
+		& > i {
+			font-size: 1.1rem;
+		}
+
+		& > img {
+			width: 21px;
+			padding-right: 5px;
+		}
+
+		& > small {
+			padding-left: 5px;
+			font-family: $font-mono;
+			font-size: 14px;
+		}
+
+		&--selected {
+			color: white;
+			background-color: rgba(0, 0, 0, 0.3);
+			box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+
+		&:not(.network-menu__item--selected):hover {
+			background-color: lighten($color-dark, 4%);
+		}
+	}
+
+	&__icon {
+		margin-right: 0.5em;
+	}
+}
+
+.moreInfo-menu {
+	position: absolute;
+	top: 4rem;
+	right: 0;
+	width: 15rem;
+	color: #01c0fd;
+	padding: 0.2em 0.5em;
+	background-color: $color-bg-network-menu;
+	box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.3);
+	font-size: 14px;
+	border-radius: 25px;
+	overflow: hidden;
+	z-index: 26;
+
+	&__item {
+		display: flex;
+		align-items: center;
+		padding: 0.8em 1.5em;
+		margin: 0.3em 0;
+		border-radius: 17px;
+		transition: all 0.3s ease-out;
+		cursor: pointer;
+
+		& > ion-icon {
+			font-size: 1.3em;
+			padding-right: 10px;
+		}
+
+		&--selected {
+			color: white;
+			background-color: rgba(0, 0, 0, 0.3);
+			box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+
+		&:not(.network-menu__item--selected):hover {
+			background-color: lighten($color-dark, 4%);
+		}
+	}
+
+	&__icon {
+		margin-right: 0.5em;
+	}
+}
+
+@media (max-width: 1366px) {
+	.Header {
+		grid-template-columns: 25% 34% 1fr;
+	}
+}
+
+@media (max-width: 1200px) {
+	.Header {
+		grid-template-columns: 25% 1fr 35%;
+
+		&__networks,
+		&__account-btn {
+			width: 100%;
+		}
+
+		&__network {
+			width: 70%;
+		}
+
+		&__network-btn span {
+			display: none;
+		}
+
+		&__network-icon {
+			font-size: 1.7em;
+		}
+
+		&__account-btn.connected p {
+			display: none;
+		}
+
+		&__account-btn > ion-icon {
+			font-size: 1.6rem;
+		}
+
+		&__moreInfo {
+			&-btn {
+				font-size: 1.8em;
+			}
+		}
+	}
+}
+
+@media (max-width: 1024px) {
+	.Header {
+		grid-template-columns: 26% 54% 1fr;
+
+		&__connection {
+			grid-template-columns: 60% 40%;
+			font-size: 1.1em;
+		}
+
+		&__network {
+			width: 100%;
+		}
+
+		&__account {
+			width: 25%;
+			position: fixed;
+			bottom: 2%;
+			right: 3%;
+		}
+
+		&__account-btn {
+			font-size: 1.3rem;
+			padding-block: 1.1rem;
+			font-weight: 900;
+
+			&.connected {
+				border-radius: 1.6em;
+			}
+		}
+
+		&__moreInfo {
+		}
+
+		&__network-btn {
+			padding-left: 2em;
+
+			& > ion-icon {
+				font-size: 1.4em;
+			}
+		}
+
+		&__tabs {
+			height: 58px;
+		}
+
+		&__tab {
+			padding-block: 0.8rem;
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	.Header {
+		align-items: center;
+		grid-template-columns: 12% 70% 1fr;
+		padding-top: 1rem;
+		position: relative;
+		z-index: 30;
+
+		&__title,
+		&__span {
+			display: none;
+		}
+
+		&__connection {
+			grid-template-columns: 100%;
+		}
+
+		&__moreInfo {
+			display: none;
+		}
+
+		&__tabs {
+			height: 69px;
+			font-size: 1.3rem;
+			background: rgb(0, 12, 44);
+			box-shadow: 0px 2px 10px rgb(18, 16, 38);
+		}
+
+		&__tab {
+			padding-block: 0.9rem;
+			font-size: 1.1em;
+		}
+	}
+
+	.network-menu {
+		left: -5rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.Header {
+		grid-template-columns: 1fr 65%;
+
+		&__img {
+			max-width: 5rem;
+		}
+
+		&__connection {
+			grid-template-columns: 23% 1fr 15%;
+		}
+
+		&__networks {
+			width: 70%;
+			align-items: center;
+		}
+
+		&__network-btn {
+			font-size: 1.1em;
+			padding-block: 0;
+			justify-content: center;
+			padding: 1rem;
+			border: none;
+
+			&.active {
+				box-shadow: 0px 0px 1px 5px rgba(2, 14, 51, 0.3), 0px 0px 1px rgba(0, 0, 0, 0.1);
+			}
+
+			& > ion-icon {
+				display: none;
+			}
+		}
+
+		&__network {
+			width: max-content;
+		}
+
+		&__tabs-wrapper {
+			width: 100%;
+			position: fixed;
+			left: 0;
+			bottom: 3%;
+		}
+
+		&__tab--active {
+			width: 62%;
+		}
+
+		&__account {
+			position: relative;
+			width: 100%;
+			margin-left: 0;
+		}
+
+		&__account-btn {
+			border-radius: 1.1em;
+			font-size: 1.4em;
+			box-shadow: 0px 0 10px 0 #0000008a;
+
+			&:not(.connected) > ion-icon {
+				display: none;
+			}
+		}
+
+		&__moreInfo {
+			display: block;
+			position: relative;
+			justify-content: center;
+			bottom: 0;
+			right: 0;
+			font-size: 1.3rem;
+		}
+	}
+
+	.network-menu {
+		top: 5rem;
+		font-size: 1em;
+		border-radius: 30px;
+
+		&__item {
+			font-size: 1.03em;
+			border-radius: 22px;
+		}
+
+		&__icon {
+			font-size: 1.25em;
+		}
+	}
+}
+
+@media (max-width: 576px) {
+	.Header {
+		grid-template-columns: 50% 1fr;
+		padding-inline: 1.5rem;
+		font-size: 14px;
+
+		&__img {
+			max-width: 4rem;
+		}
+
+		&__connection {
+			grid-template-columns: 100%;
+			justify-content: end;
+
+			&.connected {
+				grid-template-columns: 40% 60%;
+
+				.Header__account-btn {
+					display: flex;
+					width: 100%;
+					font-size: 17px;
+
+					ion-icon {
+						display: block;
+						padding-right: 0;
+						font-size: 1.4em;
+					}
+				}
+			}
+
+			&:not(.connected) > .Header__networks {
+				display: none;
+			}
+
+			& > .Header__account-btn {
+				width: 70%;
+				justify-self: end;
+				padding-block: 0.8em;
+				font-size: 17px;
+				border-radius: 1.5em;
+			}
+		}
+
+		&__moreInfo {
+			display: none;
+		}
+	}
+}
