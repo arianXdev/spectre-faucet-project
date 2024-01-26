@@ -8,7 +8,8 @@ $color-bg-network-menu: $color-dark;
 	z-index: 16;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 28% 33% 1fr;
+	grid-template-columns: 28% 20%;
+	justify-content: space-between;
 	padding-top: 0.4rem;
 	padding-inline: 2rem;
 	font-size: 16px;
@@ -197,7 +198,8 @@ $color-bg-network-menu: $color-dark;
 
 	&__account {
 		display: inherit;
-		grid-template-columns: 100%;
+		grid-template-columns: 80%;
+		justify-content: end;
 		align-items: center;
 		margin-left: 0.5rem;
 	}
@@ -205,17 +207,16 @@ $color-bg-network-menu: $color-dark;
 	&__account-btn {
 		position: relative;
 		@include displayFlex(center);
-		width: 90%;
+		width: 100%;
 		padding: 0.7rem 2.2rem 0.7rem 1.5rem;
 		font-family: $font-oxanium;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		font-weight: 700;
 		color: $color-primary;
 		border-radius: 1.1rem;
 		background: white;
 		box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 		transition: all 0.3s ease-in-out;
-		align-self: center;
 
 		&.connected {
 			width: 100%;
