@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import { Header } from "./layouts";
-
 import { ethers } from "ethers";
+
+import { Header } from "./layouts";
+import faucetContract from "./ethereum/faucet";
 
 import { Toaster } from "react-hot-toast";
 import Typed from "typed.js";
