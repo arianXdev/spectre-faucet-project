@@ -8,7 +8,7 @@ $color-bg-network-menu: $color-dark;
 	z-index: 16;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 28% 20%;
+	grid-template-columns: 28% 35%;
 	justify-content: space-between;
 	padding-top: 0.4rem;
 	padding-inline: 2rem;
@@ -102,8 +102,7 @@ $color-bg-network-menu: $color-dark;
 	/* ----------------------- */
 	&__connection {
 		display: grid;
-		grid-template-columns: 42% 1fr 20%;
-		gap: 0.5rem;
+		grid-template-columns: 1fr 1fr;
 		color: white;
 	}
 
@@ -116,7 +115,7 @@ $color-bg-network-menu: $color-dark;
 
 	&__network {
 		position: relative;
-		width: 80%;
+		width: 77%;
 	}
 
 	&__network-btn {
@@ -198,10 +197,9 @@ $color-bg-network-menu: $color-dark;
 
 	&__account {
 		display: inherit;
-		grid-template-columns: 80%;
+		grid-template-columns: 85%;
 		justify-content: end;
 		align-items: center;
-		margin-left: 0.5rem;
 	}
 
 	&__account-btn {

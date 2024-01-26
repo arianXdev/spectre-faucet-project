@@ -15,6 +15,8 @@ const App = () => {
 	const [walletAddress, setWalletAddress] = useState("");
 	const [signer, setSigner] = useState<ethers.Signer>();
 	const [faucet, setFaucet] = useState<ethers.Contract>();
+
+	const [chainId, setChainId] = useState();
 	const [transactionData, setTransactionData] = useState("");
 
 	const arianNameRef = useRef<HTMLHeadingElement>(null);
@@ -59,6 +61,8 @@ const App = () => {
 		// Get the current account if connected
 		getCurrentWalletConnected();
 		changeAccountListener();
+
+		window.ethereum.on("chainChanged", () => window.location.reload());
 	}, [walletAddress]);
 
 	const connectWallet = async () => {
@@ -66,6 +70,7 @@ const App = () => {
 			try {
 				// Get provider (read-only connection to the blockchain)
 				const provider = new ethers.BrowserProvider(window.ethereum);
+				setChainId((await provider.getNetwork()).chainId);
 
 				// Fetch accounts
 				const accounts = await provider.send("eth_requestAccounts", []);
@@ -90,6 +95,7 @@ const App = () => {
 			try {
 				// Get provider (read-only connection to the blockchain)
 				const provider = new ethers.BrowserProvider(window.ethereum);
+				setChainId((await provider.getNetwork()).chainId);
 
 				// Fetch accounts
 				const accounts = await provider.send("eth_accounts", []);
@@ -101,8 +107,6 @@ const App = () => {
 					// Get the local contract instance
 					setFaucet(faucetContract(provider));
 					setWalletAddress(accounts[0]);
-				} else {
-					toast("Please connect your wallet!");
 				}
 			} catch (err) {
 				console.log(err.message);
@@ -138,7 +142,9 @@ const App = () => {
 
 	return (
 		<>
-			<Header connectWallet={connectWallet} account={walletAddress} />
+			<div className="container">
+				<Header connectWallet={connectWallet} account={walletAddress} rawChainId={chainId} />
+			</div>
 
 			<main className="main">
 				<div className="container">
