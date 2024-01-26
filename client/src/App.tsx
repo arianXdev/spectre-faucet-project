@@ -4,9 +4,6 @@ import { ethers } from "ethers";
 import { Header } from "./layouts";
 import faucetContract from "./ethereum/faucet";
 
-import { Link } from "react-router-dom";
-import { Icon } from "./components";
-
 import LOGO from "./assets/images/spectre-logo-light.png";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -61,6 +58,7 @@ const App = () => {
 	useEffect(() => {
 		// Get the current account if connected
 		getCurrentWalletConnected();
+		changeAccountListener();
 	}, [walletAddress]);
 
 	const connectWallet = async () => {
@@ -114,6 +112,16 @@ const App = () => {
 		}
 	};
 
+	const changeAccountListener = async () => {
+		if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+			window.ethereum.on("accountsChanged", (accounts) => {
+				setWalletAddress(accounts[0]);
+			});
+		} else {
+			setWalletAddress("");
+		}
+	};
+
 	const getSPECHandler = async (e) => {
 		e.preventDefault();
 
@@ -121,7 +129,7 @@ const App = () => {
 			const faucetContractWithSigner = faucet.connect(signer);
 			const tx = await faucetContractWithSigner.requestTokens();
 			toast.success("Operation succeeded - Enjoy interacting with Spectre DEX!");
-			setTransactionData(tx.transactionHash);
+			setTransactionData(tx.hash);
 		} catch (err) {
 			console.log(err.message);
 			toast.error("Something went wrong! - Try again later.");
@@ -155,10 +163,25 @@ const App = () => {
 										placeholder="Enter Your Wallet Address (0x...)"
 										defaultValue={walletAddress ? walletAddress : ""}
 									/>
-									<button type="submit" className="main__btn" onClick={getSPECHandler}>
+
+									<button
+										type="submit"
+										className="main__btn"
+										onClick={getSPECHandler}
+										disabled={walletAddress ? false : true}
+									>
 										Get SPEC
 									</button>
 								</form>
+
+								{transactionData ? (
+									<p className="tx-hash">
+										TX Hash:{" "}
+										<a href={`https://sepolia.etherscan.io/tx/${transactionData}`} target="_blank">
+											{transactionData}
+										</a>
+									</p>
+								) : null}
 							</div>
 						</div>
 					</div>
