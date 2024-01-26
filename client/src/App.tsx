@@ -150,26 +150,26 @@ const App = () => {
 	const getChainExplorer = (chainId: NetworksChainId) => {
 		switch (chainId) {
 			case NetworksChainId.Sepolia:
-				return "https://sepolia.etherscan.io/tx";
+				return "https://sepolia.etherscan.io";
 
 			case NetworksChainId.Polygon:
-				return "https://mumbai.polygonscan.com/tx";
+				return "https://mumbai.polygonscan.com";
 
 			case NetworksChainId.Avalanche:
-				return "https://testnet.snowtrace.io/tx";
+				return "https://testnet.snowtrace.io";
 
 			case NetworksChainId.BSC:
-				return "https://testnet.bscscan.com/tx";
+				return "https://testnet.bscscan.com";
 
 			default:
-				return "https://sepolia.etherscan.io/tx";
+				return "https://sepolia.etherscan.io";
 		}
 	};
 
 	return (
 		<>
 			<div className="container">
-				<Header connectWallet={connectWallet} account={walletAddress} rawChainId={chainId} />
+				<Header connectWallet={connectWallet} account={walletAddress} rawChainId={chainId} getChainExplorer={getChainExplorer} />
 			</div>
 
 			<main className="main">
@@ -209,7 +209,7 @@ const App = () => {
 								{transactionData ? (
 									<p className="tx-hash">
 										TX Hash:{" "}
-										<a href={`${getChainExplorer(String(chainId))}/${transactionData}`} target="_blank">
+										<a href={`${getChainExplorer(String(chainId))}/tx/${transactionData}`} target="_blank">
 											{transactionData}
 										</a>
 									</p>

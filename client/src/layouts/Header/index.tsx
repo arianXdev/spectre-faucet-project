@@ -45,7 +45,7 @@ enum NetworksSymbol {
 	Avalanche = "AVAX",
 }
 
-const Header = ({ connectWallet, account, rawChainId }) => {
+const Header = ({ connectWallet, account, rawChainId, getChainExplorer }) => {
 	// Get the current network's chain ID
 	const chainId = `0x${rawChainId?.toString(16).toLowerCase()}`;
 
@@ -123,6 +123,12 @@ const Header = ({ connectWallet, account, rawChainId }) => {
 		if (networkMenuRef.current && !networkMenuRef.current.contains(event.target as Node)) {
 			setShowNetworkMenu(false);
 		}
+	};
+
+	const handleViewOnExplorer = () => {
+		const explorerURL = `${getChainExplorer(String(rawChainId))}/address/${account}`;
+		// Redirect the user to another web page
+		window.open(explorerURL, "_blank");
 	};
 
 	useEffect(() => {
@@ -221,12 +227,13 @@ const Header = ({ connectWallet, account, rawChainId }) => {
 
 				<div className="Header__account">
 					<button
-						onClick={connectWallet}
+						onClick={account ? handleViewOnExplorer : connectWallet}
 						className={`Header__account-btn ${account ? "connected" : ""}`}
 						title={account ? account : "Please connect your wallet!"}
 					>
 						{account ? <Icon name="person" /> : <Icon name="wallet" />}
 						<p className="Header__account-address">{account ? accountAddress : "Connect Wallet"}</p>
+						<Icon name="chevron-forward-outline" />
 					</button>
 				</div>
 			</div>
