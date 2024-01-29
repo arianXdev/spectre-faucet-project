@@ -376,7 +376,11 @@ $color-bg-network-menu: $color-dark;
 
 @media (max-width: 1366px) {
 	.Header {
-		grid-template-columns: 25% 34% 1fr;
+		grid-template-columns: 25% 40%;
+
+		&__account-btn {
+			font-size: 1rem;
+		}
 	}
 }
 
